@@ -6,6 +6,8 @@
  * Time: 19:50
  */
 $list_kategori = GetAllKategori();
+date_default_timezone_set("Asia/Jakarta");
+$now = new DateTime();
 ?>
 <section class="panel">
     <header class="panel-heading wht-bg">
@@ -17,19 +19,11 @@ $list_kategori = GetAllKategori();
         <div class="mail-option">
             <form action="#" class="form-inline">
                 <div class="form-group">
-                    <div class="input-group input-large" id="tanggal" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
-                        <input type="text" class="form-control dpd1" name="from" id="from" placeholder="Tanggal Mulai">
+                    <div class="input-group input-large" id="tanggal" data-date="2015-01-01" data-date-format="yyyy-mm-dd">
+                        <input type="text" class="form-control dpd1" value="<?php echo $now->format('m/01/Y'); ?>" name="from" id="from" placeholder="Tanggal Mulai" >
                         <span class="input-group-addon">s/d</span>
-                        <input type="text" class="form-control dpd2" name="to" id="to" placeholder="Tanggal Akhir">
+                        <input type="text" class="form-control dpd2" value="<?php echo $now->format('m/d/Y'); ?>" name="to" id="to" placeholder="Tanggal Akhir">
                     </div>
-                </div>
-                <div class="form-group">
-                    <select class="form-control" id="kategori">
-                        <option value="">Kategori</option>
-                        <?php foreach ($list_kategori as $kategori){ ?>
-                        <option value="<?php echo $kategori['id']; ?>"><?php echo $kategori['nama']; ?></option>
-                        <?php } ?>
-                    </select>
                 </div>
                 <button type="button" class="btn btn-default" onclick="BuatLaporan()"><i class="fa fa-book"></i> Buat Laporan</button>
                 <button type="button" class="btn btn-default" id="kirim" style="display: none;"><i class="fa fa-send"></i> Kirim</button>
@@ -49,14 +43,12 @@ $list_kategori = GetAllKategori();
         {
             var from = $("#from").val();
             var to = $("#to").val();
-            var kategori = $("#kategori").val();
             $.ajax({
                 type	: "POST",
                 url 	: "../modules/ajax/buat_laporan.php",
                 data	: {
                     from : from,
-                    to : to,
-                    kategori : kategori
+                    to : to
                 },
                 success	: function(html){
                     $("#laporan").attr('src','../plugins/ViewerJS/#../../laporan/'+html);

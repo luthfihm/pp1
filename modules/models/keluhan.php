@@ -76,15 +76,15 @@
         return ($data > 0);
     }
 
-    function BuatLaporan($from,$to,$kategori)
+    function GetNumLaporan($from,$to,$taman,$kategori)
     {
-        $data = $GLOBALS['database']->select("keluhan","*",[
+        $data = $GLOBALS['database']->count("keluhan","*",[
             "AND" => [
                 "status" => 1,
+                "taman" => $taman,
                 "kategori" => $kategori,
                 "waktu[<>]" => [$from." 00:00:00",$to." 23:59:59"]
-            ],
-            "ORDER" => ["taman ASC","waktu ASC"]
+            ]
         ]);
         return $data;
     }

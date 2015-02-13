@@ -6,8 +6,20 @@
  * Time: 21:40
  */
 require_once dirname(__FILE__)."/../models/keluhan.php";
+require_once dirname(__FILE__)."/../models/taman.php";
+require_once dirname(__FILE__)."/../models/kategori.php";
 
 require_once dirname(__FILE__)."/../../plugins/tcpdf/tcpdf.php";
+
+$list_taman = GetAllTaman();
+
+$from = new DateTime($_POST['from']);
+$to = new DateTime($_POST['to']);
+
+$bulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+
+$mulai = $from->format('j').' '.$bulan[$from->format('n')-1].' '.$from->format('Y');
+$akhir = $to->format('j').' '.$bulan[$to->format('n')-1].' '.$to->format('Y');
 
 class MYPDF extends TCPDF {
 
@@ -29,7 +41,7 @@ class MYPDF extends TCPDF {
         $this->SetY(35);
         $this->SetX(50);
         $this->SetFont('times', '', 12);
-        $this->Cell(0, 10, 'JL. Ambon, No.1 A, Bandung, West Java, Indonesia, Telp (022) 4231921', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+        $this->Cell(0, 10, 'JL. Ambon, No.1 A, Bandung, Jawa Barat, Telp (022) 4231921', 0, false, 'C', 0, '', 0, false, 'M', 'M');
         $this->Line(10, 43, 200, 43);
     }
 
@@ -65,7 +77,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+$pdf->SetMargins(PDF_MARGIN_LEFT, 50, PDF_MARGIN_RIGHT);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -88,11 +100,45 @@ $pdf->SetFont('times', '', 12);
 
 // add a page
 $pdf->AddPage();
-$pdf->SetY(50);
 $html = '
 <h1 align="center">Laporan Keluhan Taman di Kota Bandung</h1>
-<p align="center">Periode 1 Januari 2015 - 31 Januari 2015</p>
+<p align="center">Periode '.$mulai.' - '.$akhir.'</p>
 ';
+
+$html .= '<ol style="list-style-type: upper-alpha;">';
+
+foreach ($list_taman as $taman) {
+    $list_kategori = GetAllKategori();
+    $tab_kat = "";
+    foreach ($list_kategori as $kategori)
+    {
+        $tab_kat .= '
+<tr>
+    <td>'.$kategori['nama'].'</td>
+    <td align="center">'.GetNumLaporan($from->format('Y-m-d'),$to->format('Y-m-d'),$taman['id'],$kategori['id']).'</td>
+</tr>
+';
+    }
+    $html .= '
+<li>'.$taman['nama'].'<br>
+Alamat : '.$taman['alamat'].'
+<br>
+<table cellspacing="0" cellpadding="4" border="1">
+    <tr>
+        <td align="center" valign="middle">Kategori</td>
+        <td align="center">Jumlah Keluhan Masuk</td>
+    </tr>
+    '.$tab_kat.'
+</table>
+</li>';
+}
+
+
+$html .= '</ol>';
+
+$pdf->writeHTML($html, true, false, true, false, '');
+
+
 
 // writeHTML($html, $ln=true, $fill=false, $reseth=false, $cell=false, $align='')
 // writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
@@ -101,7 +147,7 @@ $html = '
 
 
 // output the HTML content
-$pdf->writeHTML($html, true, false, true, false, '');
+
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -111,10 +157,11 @@ $pdf->lastPage();
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output(dirname(dirname(dirname(__FILE__))).'/laporan/example.pdf', 'F');
+$filename = "Laporan ".$mulai." - ".$akhir.".pdf";
+$pdf->Output(dirname(dirname(dirname(__FILE__))).'/laporan/'.$filename, 'F');
 
 //============================================================+
 // END OF FILE
 //============================================================+
-echo "example.pdf";
+echo $filename;
 ?>

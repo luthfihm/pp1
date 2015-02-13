@@ -105,7 +105,7 @@ MAIN CONTENT
     <section class="panel">
         <div class="panel-body">
             <a href="index.php?buat_laporan"  class="btn btn-compose">
-                <i class="fa fa-pencil"></i>  Buat Laporan
+                <i class="fa fa-book"></i>  Buat Laporan
             </a>
             <ul class="nav nav-pills nav-stacked mail-nav">
                 <li class="<?php if ($active=='masuk') echo 'active'; ?>"><a href="index.php?keluhan_masuk"> <i class="fa fa-inbox"></i> Keluhan Masuk  <?php if ($num_keluhan >0){ ?><span class="label label-theme pull-right inbox-notification"><?php echo $num_keluhan ?></span><?php } ?></a></li>
