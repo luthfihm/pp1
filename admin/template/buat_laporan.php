@@ -31,12 +31,27 @@ $list_kategori = GetAllKategori();
                         <?php } ?>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-default">Buat Laporan</button>
+                <button type="button" class="btn btn-default" onclick="BuatLaporan()"><i class="fa fa-book"></i> Buat Laporan</button>
+                <button type="button" class="btn btn-default" id="kirim" style="display: none;"><i class="fa fa-send"></i> Kirim</button>
             </form>
         </div>
-        <iframe src = "../plugins/ViewerJS/#../../laporan/Laporan.pdf" width='100%' height='500' allowfullscreen webkitallowfullscreen></iframe>
+        <div class="col-md-12" id="loading" style="display: none;">
+            <br/>
+            <center>
+                <img src="../assets/img/loading.gif" alt=""/>
+            </center>
+            <br/>
+        </div>
+        <iframe id="laporan" src = "" width='100%' height='500' allowfullscreen webkitallowfullscreen style="display: none;"></iframe>
     </div>
     <script>
-
+        function BuatLaporan()
+        {
+            $("#loading").show();
+            $("#laporan").attr('src','../plugins/ViewerJS/#../../laporan/Laporan.pdf');
+            $("#loading").hide();
+            $("#laporan").show();
+            $("#kirim").show();
+        }
     </script>
 </section>
