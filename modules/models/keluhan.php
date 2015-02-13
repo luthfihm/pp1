@@ -75,4 +75,17 @@
         ]);
         return ($data > 0);
     }
+
+    function BuatLaporan($from,$to,$kategori)
+    {
+        $data = $GLOBALS['database']->select("keluhan","*",[
+            "AND" => [
+                "status" => 1,
+                "kategori" => $kategori,
+                "waktu[<>]" => [$from." 00:00:00",$to." 23:59:59"]
+            ],
+            "ORDER" => ["taman ASC","waktu ASC"]
+        ]);
+        return $data;
+    }
 ?>

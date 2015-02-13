@@ -18,13 +18,13 @@ $list_kategori = GetAllKategori();
             <form action="#" class="form-inline">
                 <div class="form-group">
                     <div class="input-group input-large" id="tanggal" data-date="01/01/2014" data-date-format="mm/dd/yyyy">
-                        <input type="text" class="form-control dpd1" name="from" placeholder="Tanggal Mulai">
+                        <input type="text" class="form-control dpd1" name="from" id="from" placeholder="Tanggal Mulai">
                         <span class="input-group-addon">s/d</span>
-                        <input type="text" class="form-control dpd2" name="to" placeholder="Tanggal Akhir">
+                        <input type="text" class="form-control dpd2" name="to" id="to" placeholder="Tanggal Akhir">
                     </div>
                 </div>
                 <div class="form-group">
-                    <select class="form-control">
+                    <select class="form-control" id="kategori">
                         <option value="">Kategori</option>
                         <?php foreach ($list_kategori as $kategori){ ?>
                         <option value="<?php echo $kategori['id']; ?>"><?php echo $kategori['nama']; ?></option>
@@ -47,11 +47,30 @@ $list_kategori = GetAllKategori();
     <script>
         function BuatLaporan()
         {
-            $("#loading").show();
-            $("#laporan").attr('src','../plugins/ViewerJS/#../../laporan/Laporan.pdf');
-            $("#loading").hide();
-            $("#laporan").show();
-            $("#kirim").show();
+            var from = $("#from").val();
+            var to = $("#to").val();
+            var kategori = $("#kategori").val();
+            $.ajax({
+                type	: "POST",
+                url 	: "../modules/ajax/buat_laporan.php",
+                data	: {
+                    from : from,
+                    to : to,
+                    kategori : kategori
+                },
+                success	: function(html){
+                    $("#laporan").attr('src','../plugins/ViewerJS/#../../laporan/'+html);
+                    $("#loading").hide();
+                    $("#laporan").show();
+                    $("#kirim").show();
+                },
+                beforeSend : function(){
+                    $("#laporan").attr('src','');
+                    $("#laporan").hide();
+                    $("#kirim").hide();
+                    $("#loading").show();
+                }
+            });
         }
     </script>
 </section>
