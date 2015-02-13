@@ -7,24 +7,35 @@
  */
     $num_keluhan = GetNumKeluhan();
     $active = "";
+    $title = "";
     if (isset($_REQUEST['keluhan']))
     {
         $content = "keluhan.php";
+        $title = "Keluhan";
     }
     else if (isset($_REQUEST['keluhan_masuk']))
     {
         $content = "keluhan_masuk.php";
         $active = "masuk";
+        $title = "Keluhan Masuk";
     }
     else if (isset($_REQUEST['keluhan_terverifikasi']))
     {
         $content = "keluhan_terverifikasi.php";
         $active = "verified";
+        $title = "Keluhan Terverifikasi";
+    }
+    else if (isset($_REQUEST['buat_laporan']))
+    {
+        $content = "buat_laporan.php";
+        $active = "laporan";
+        $title = "Buat Laporan";
     }
     else
     {
         $content = "keluhan_masuk.php";
         $active = "masuk";
+        $title = "Home";
     }
     $list_taman = GetAllTaman();
 ?>
@@ -39,12 +50,18 @@
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <link rel="shortcut icon" href="http://alvarez.is/demo/dashio/favicon.png">
 
-    <title>Administrator - Home | Sistem Pengaduan Taman Kota Bandung</title>
+    <title>Administrator - <?php echo $title; ?> | Sistem Pengaduan Taman Kota Bandung</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
     <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../assets/css/smoothness/jquery-ui-1.9.2.custom.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../assets/js/bootstrap-fileupload/bootstrap-fileupload.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/js/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/js/bootstrap-daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/js/bootstrap-timepicker/compiled/timepicker.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/js/bootstrap-datetimepicker/datertimepicker.css" />
 
     <!-- Custom styles for this template -->
     <link href="../assets/css/style.css" rel="stylesheet">
@@ -52,8 +69,8 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="../https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="../https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -87,7 +104,7 @@ MAIN CONTENT
 <div class="col-sm-3">
     <section class="panel">
         <div class="panel-body">
-            <a href="#"  class="btn btn-compose">
+            <a href="index.php?buat_laporan"  class="btn btn-compose">
                 <i class="fa fa-pencil"></i>  Buat Laporan
             </a>
             <ul class="nav nav-pills nav-stacked mail-nav">
@@ -137,13 +154,24 @@ MAIN CONTENT
 <script src="../assets/js/common-scripts.js"></script>
 
 <!--script for this page-->
+<script src="../assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+<script type="text/javascript" src="../assets/js/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+<script type="text/javascript" src="../assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="../assets/js/bootstrap-daterangepicker/date.js"></script>
+<script type="text/javascript" src="../assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<script type="text/javascript" src="../assets/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="../assets/js/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="../assets/js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+<script src="../assets/js/advanced-form-components.js"></script>
 
 <script>
-    //custom select box
+//custom select box
 
-    $(function(){
-        $('select.styled').customSelect();
-    });
+$(function(){
+    $('select.styled').customSelect();
+});
 
 </script>
 

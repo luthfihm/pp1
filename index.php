@@ -151,7 +151,9 @@
 	<script type="text/javascript" src="assets/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript" src="assets/js/bootstrap-daterangepicker/moment.min.js"></script>
 	<script type="text/javascript" src="assets/js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
-    
+
+    <script src="assets/js/advanced-form-components.js"></script>
+
   <script>
       //custom select box
 

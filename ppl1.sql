@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.10
+-- version 4.2.5
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 13, 2015 at 02:18 PM
--- Server version: 5.5.40
+-- Generation Time: Feb 13, 2015 at 06:35 PM
+-- Server version: 5.5.38
 -- PHP Version: 5.4.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `kategori` (
 `id` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `deskripsi` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `kategori`
@@ -74,17 +74,19 @@ CREATE TABLE IF NOT EXISTS `keluhan` (
   `deskripsi` text NOT NULL,
   `foto` varchar(255) NOT NULL,
   `kategori` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `status` tinyint(1) NOT NULL,
+  `read` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `keluhan`
 --
 
-INSERT INTO `keluhan` (`id`, `nama_pelapor`, `email`, `waktu`, `taman`, `deskripsi`, `foto`, `kategori`, `status`) VALUES
-(1, 'Luthfi', 'luthfi_hamid_m@yahoo.co.id', '2015-02-11 15:30:06', 1, 'Test', '20150211-233006.jpg', 1, 1),
-(2, 'Andrey', 'andrey@andrey.com', '2015-02-12 00:40:05', 1, 'Halo', '20150212-084005.jpg', 1, 1),
-(3, 'Rifda', 'rifda@rifda.com', '2015-02-12 11:26:11', 1, 'Haha', '20150212-192611.jpg', 3, 1);
+INSERT INTO `keluhan` (`id`, `nama_pelapor`, `email`, `waktu`, `taman`, `deskripsi`, `foto`, `kategori`, `status`, `read`) VALUES
+(1, 'Luthfi', 'luthfi_hamid_m@yahoo.co.id', '2014-12-31 15:30:06', 1, 'Test', '20150211-233006.jpg', 1, 1, 1),
+(3, 'Rifda', 'rifda@rifda.com', '2015-02-12 11:26:11', 1, 'Haha', '', 3, 1, 1),
+(6, 'Luthfi', 'luthfi_hamid_m@arc.itb.ac.id', '2015-02-13 07:31:16', 1, 'Test aja', '20150213-153116.jpg', 3, 1, 1),
+(8, 'Luthfi', 'luthfi_hamid_m@arc.itb.ac.id', '2015-02-13 07:54:30', 1, 'Test aja', '20150213-155430.jpg', 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -98,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `taman` (
   `alamat` varchar(255) NOT NULL,
   `latitude` double NOT NULL,
   `longitude` double NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `taman`
@@ -150,7 +152,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT for table `keluhan`
 --
 ALTER TABLE `keluhan`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `taman`
 --
