@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 17, 2015 at 12:01 AM
+-- Generation Time: Feb 17, 2015 at 03:26 AM
 -- Server version: 5.5.38
 -- PHP Version: 5.4.24
 
@@ -48,7 +48,14 @@ CREATE TABLE IF NOT EXISTS `instansi` (
 `id` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `instansi`
+--
+
+INSERT INTO `instansi` (`id`, `nama`, `email`) VALUES
+(1, 'Dinas Pertamanan dan Pemakaman kota Bandung', 'luthfi_hamid_m@yahoo.co.id');
 
 -- --------------------------------------------------------
 
@@ -89,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `keluhan` (
   `kategori` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `read` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `keluhan`
@@ -100,7 +107,9 @@ INSERT INTO `keluhan` (`id`, `nama_pelapor`, `email`, `waktu`, `taman`, `deskrip
 (3, 'Rifda', 'rifda@rifda.com', '2015-02-12 11:26:11', 1, 'Haha', '', 3, 1, 1),
 (6, 'Luthfi', 'luthfi_hamid_m@arc.itb.ac.id', '2015-02-13 07:31:16', 1, 'Test aja', '20150213-153116.jpg', 3, 1, 1),
 (8, 'Luthfi', 'luthfi_hamid_m@arc.itb.ac.id', '2015-02-13 07:54:30', 1, 'Test aja', '20150213-155430.jpg', 3, 1, 1),
-(11, 'Luthfi', 'luthfi_hamid_m@arc.itb.ac.id', '2015-02-13 18:31:38', 3, 'Ih kotor', '20150214-023138.png', 2, 1, 1);
+(11, 'Luthfi', 'luthfi_hamid_m@arc.itb.ac.id', '2015-02-13 18:31:38', 3, 'Ih kotor', '20150214-023138.png', 2, 1, 1),
+(12, 'Luthfi', 'luthfi_hamid_m@yahoo.co.id', '2015-02-16 19:08:53', 1, 'Test', '', 1, 1, 1),
+(13, 'Luthfi', 'luthfi_hamid_m@yahoo.co.id', '2015-02-16 19:10:42', 1, 'Test', '20150217-031042.png', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -114,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `taman` (
   `alamat` varchar(255) NOT NULL,
   `latitude` double NOT NULL,
   `longitude` double NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `taman`
@@ -124,8 +133,7 @@ INSERT INTO `taman` (`id`, `nama`, `alamat`, `latitude`, `longitude`) VALUES
 (1, 'Taman Dago', 'Jalan Juanda', -6.898721, 107.6126),
 (2, 'Taman Ganesha', 'Jalan Ganesha', -6.893925, 107.610458),
 (3, 'Taman Jomblo', 'Jembatan Pasopati', -6.898053, 107.609518),
-(16, 'a', 'a', -6.897141, 107.623401),
-(18, 'a', 'a', -6.900507, 107.618637);
+(19, 'Taman Lansia', 'Jalan Diponegoro', -6.90187, 107.6231);
 
 --
 -- Indexes for dumped tables
@@ -169,7 +177,7 @@ ALTER TABLE `taman`
 -- AUTO_INCREMENT for table `instansi`
 --
 ALTER TABLE `instansi`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `kategori`
 --
@@ -179,12 +187,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `keluhan`
 --
 ALTER TABLE `keluhan`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `taman`
 --
 ALTER TABLE `taman`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- Constraints for dumped tables
 --

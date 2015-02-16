@@ -62,12 +62,25 @@
                     </a>
 
                     <div class="links">
-                        <a href="#">View</a> -
-                        <a href="#">Download</a>
+                        <a href="#" data-toggle="modal" data-target="#modal-img">View</a> -
+                        <a href="../uploads/<?php echo $keluhan['foto']; ?>" target="_blank">Download</a>
                     </div>
                 </li>
 
             </ul>
+        </div>
+        <div class="modal fade" id="modal-img" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><?php echo $keluhan['foto']; ?></h4>
+                    </div>
+                    <div class="modal-body">
+                        <img class="img-responsive" src="../uploads/<?php echo $keluhan['foto']; ?>" alt=""/>
+                    </div>
+                </div>
+            </div>
         </div>
         <?php } ?>
         <div class="compose-btn pull-left">

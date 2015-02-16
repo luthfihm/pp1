@@ -48,6 +48,9 @@
                     </div>
 		            <br>
 		            <button class="btn btn-theme btn-block login" type="submit"><i class="fa fa-lock"></i> Login</button>
+                    <div id="fail" align="center" style="display: none;">
+                        <span class="help-block" style="color: #990000;"><i class="fa fa-warning"></i> Pasword atau Username Salah</span>
+                    </div>
 		            <hr>
 		            <center>
 		                <h3>Sistem Pengaduan Taman <br>Kota Bandung</h3>
@@ -91,8 +94,8 @@
                     if (html == 'true'){
                         window.location = "index.php";
                     }else{
-                        alert("fail");
                         $(".login").show();
+                        $("#fail").show();
                         $("#loading").hide();
                         $("#username").focus();
                     }

@@ -49,28 +49,35 @@ $now = new DateTime();
         {
             from = $("#from").val();
             to = $("#to").val();
-            $.ajax({
-                type	: "POST",
-                url 	: "../modules/ajax/buat_laporan.php",
-                data	: {
-                    from : from,
-                    to : to
-                },
-                success	: function(html){
-                    file = html;
-                    $("#laporan").attr('src','../plugins/ViewerJS/#../../laporan/'+html);
-                    $("#loading").hide();
-                    $("#laporan").show();
-                    $("#kirim").show();
-                },
-                beforeSend : function(){
-                    $(".post-proses").hide();
-                    $("#laporan").attr('src','');
-                    $("#laporan").hide();
-                    $("#kirim").hide();
-                    $("#loading").show();
-                }
-            });
+            if (CheckDate())
+            {
+                $.ajax({
+                    type	: "POST",
+                    url 	: "../modules/ajax/buat_laporan.php",
+                    data	: {
+                        from : from,
+                        to : to
+                    },
+                    success	: function(html){
+                        file = html;
+                        $("#laporan").attr('src','../plugins/ViewerJS/#../../laporan/'+html);
+                        $("#loading").hide();
+                        $("#laporan").show();
+                        $("#kirim").show();
+                    },
+                    beforeSend : function(){
+                        $(".post-proses").hide();
+                        $("#laporan").attr('src','');
+                        $("#laporan").hide();
+                        $("#kirim").hide();
+                        $("#loading").show();
+                    }
+                });
+            }
+            else
+            {
+                alert("Tanggal Tidak Valid!");
+            }
         }
 
         function KirimLaporan()
@@ -99,6 +106,13 @@ $now = new DateTime();
                     $("#load-kirim").show();
                 }
             });
+        }
+
+        function CheckDate()
+        {
+            var mulai = new Date(from);
+            var akhir = new Date(to);
+            return (mulai<=akhir);
         }
     </script>
 </section>
