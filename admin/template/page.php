@@ -112,7 +112,7 @@ TOP BAR CONTENT & NOTIFICATIONS
 <!--header start-->
 <header class="header black-bg">
     <!--logo start-->
-    <a href="index.php" class="logo"><b>Sistem Pengaduan Taman <span>Kota Bandung</span></b></a>
+    <a href="../" class="logo" target="_blank"><b>Sistem Pengaduan Taman <span>Kota Bandung</span></b></a>
     <!--logo end-->
     <div class="top-menu">
         <ul class="nav pull-right top-menu">
@@ -150,21 +150,39 @@ MAIN CONTENT
                 <li> <h4>Daftar Kategori</h4> </li>
                 <?php foreach ($list_kategori as $kategori){ ?>
                 <li class="list-kategori">
-                    <a href="#">
+                    <a href="#" id="kat<?php echo $kategori['id']; ?>">
                         <img src="../assets/img/tree.png" class="img-circle" width="20"><?php echo $kategori['nama']; ?>
                         <p class="edit-kategori">
-                            <button class="btn btn-sm btn-theme">
+                            <button class="btn btn-sm btn-theme" onclick="ShowEditkat(<?php echo $kategori['id']; ?>)">
                                 <i class="fa fa-pencil"> Edit</i>
                             </button>
-                            <button class="btn btn-sm btn-default">
+                            <button class="btn btn-sm btn-default" onclick="HapusKategori(<?php echo $kategori['id']; ?>)">
                                 <i class="fa fa-trash"> Hapus</i>
                             </button>
                         </p>
                     </a>
+                    <form action="index.php?edit_kategori=<?php echo $kategori['id']; ?>" method="post">
+                        <div class="input-group" id="edit-kat<?php echo $kategori['id']; ?>" style="display: none;">
+                            <input type="text" class="form-control" value="<?php echo $kategori['nama']; ?>" name="nama-kategori" id="nama-kategori<?php echo $kategori['id']; ?>" required>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-default" type="button" onclick="HideEditkat(<?php echo $kategori['id']; ?>)"><i class="fa fa-undo"></i></button>
+                        </span>
+                        </div><!-- /input-group -->
+                    </form>
                 </li>
                 <?php } ?>
             </ul>
-            <a href="#"> + Tambah Kategori</a>
+            <a href="#" id="add-btn-kat" onclick="ShowAddkat()"> + Tambah Kategori</a>
+            <form action="index.php?tambah_kategori" method="post">
+                <div class="input-group" id="add-kat" style="display: none;">
+                    <input type="text" class="form-control" name="nama-kategori" id="nama-kategori" required>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="fa fa-plus"></i></button>
+                            <button class="btn btn-default" type="button" onclick="HideAddkat()"><i class="fa fa-remove"></i></button>
+                        </span>
+                </div><!-- /input-group -->
+            </form>
         </div>
     </section>
 </div>
@@ -189,10 +207,41 @@ MAIN CONTENT
 <script>
 //custom select box
 
-$(function(){
-    $('select.styled').customSelect();
-});
 
+    function ShowAddkat()
+    {
+        $("#add-btn-kat").hide();
+        $("#add-kat").show();
+        $("#nama-kategori").focus();
+    }
+
+    function HideAddkat()
+    {
+        $("#add-btn-kat").show();
+        $("#add-kat").hide();
+        $("#nama-kategori").val("");
+    }
+
+    function HapusKategori(id)
+    {
+        if (confirm("Yakin untuk menghapus?"))
+        {
+            window.location = "index.php?hapus_kategori="+id;
+        }
+    }
+
+    function ShowEditkat(id)
+    {
+        $("#kat"+id).hide();
+        $("#edit-kat"+id).show();
+        $("#nama-kategori"+id).focus();
+    }
+
+    function HideEditkat(id)
+    {
+        $("#kat"+id).show();
+        $("#edit-kat"+id).hide();
+    }
 </script>
 
 </body>

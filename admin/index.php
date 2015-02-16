@@ -70,6 +70,37 @@
                 }
             }
         }
+        else if (isset($_REQUEST['tambah_kategori']))
+        {
+            if (isset($_POST['nama-kategori']))
+            {
+                TambahKategori($_POST['nama-kategori']);
+            }
+
+            header("Location: index.php");
+        }
+        else if (isset($_REQUEST['hapus_kategori']))
+        {
+            if ($_REQUEST['hapus_kategori'] != null)
+            {
+                $id = $_REQUEST['hapus_kategori'];
+                HapusKategori($id);
+            }
+            header("Location: index.php");
+        }
+        else if (isset($_REQUEST['edit_kategori']))
+        {
+            if ($_REQUEST['edit_kategori'] != null)
+            {
+                $id = $_REQUEST['edit_kategori'];
+                if (isset($_POST['nama-kategori']))
+                {
+                    $nama = $_POST['nama-kategori'];
+                    EditKategori($id,$nama);
+                }
+            }
+            header("Location: index.php");
+        }
         else
         {
             include "template/page.php";

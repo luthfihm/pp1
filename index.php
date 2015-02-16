@@ -176,8 +176,8 @@ $list_taman = GetAllTaman();
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 id="about" class="title text-center">About <span>Worthy</span></h1>
-                <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta officia, aspernatur.</p>
+                <h1 id="about" class="title text-center">Tentang <span>Kami</span></h1>
+                <p class="lead text-center">Kami "SARIUS" Kelompok 6 pada Mata Kuliah IF3250 Proyek Perangkat Lunak</p>
                 <div class="space"></div>
                 <div class="row">
                     <div class="col-md-6">
@@ -185,14 +185,14 @@ $list_taman = GetAllTaman();
                         <div class="space"></div>
                     </div>
                     <div class="col-md-6">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi adipisci illo, voluptatum ipsam fuga error commodi architecto, laudantium culpa tenetur at id, beatae placeat deserunt iure quas voluptas fugit eveniet.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo ducimus explicabo quibusdam temporibus deserunt doloremque pariatur ea, animi a. Delectus similique atque eligendi, enim vel reiciendis deleniti neque aliquid, sit?</p>
+                        <p>Kami Kelompok 6 pada mata kuliah IF3250-Proyek Perangkat Lunak yang menamakan diri kami "SARIUS". Namun, sehari-hari lebih dikenal kelompok 6 karena untuk mempermudah identifikasi kelompok</p>
+                        <p>Nama "SARIUS" sendiri diambil saat perdebatan nama yang bagaimana yang harus dipakai, apakah serius atau terkesan lucu, dan akhirnya kami mencari jalan tengah diantara keduanya, dan terbentuklah nama "SARIUS" yang beranggotakan:</p>
                         <ul class="list-unstyled">
-                            <li><i class="fa fa-caret-right pr-10 text-colored"></i> Lorem ipsum dolor sit amet</li>
-                            <li><i class="fa fa-caret-right pr-10 text-colored"></i> Reiciendis deleniti neque aliquid</li>
-                            <li><i class="fa fa-caret-right pr-10 text-colored"></i> Ipsam fuga error commodi</li>
-                            <li><i class="fa fa-caret-right pr-10 text-colored"></i> Lorem ipsum dolor sit amet</li>
-                            <li><i class="fa fa-caret-right pr-10 text-colored"></i> Dignissimos molestiae necessitatibus</li>
+                            <li><i class="fa fa-caret-right pr-10 text-colored"></i> 13512030 - Alvin Natawiguna</li>
+                            <li><i class="fa fa-caret-right pr-10 text-colored"></i> 13512058 - Andrey Simaputera</li>
+                            <li><i class="fa fa-caret-right pr-10 text-colored"></i> 13512090 - Nisa Dian Rachmadi</li>
+                            <li><i class="fa fa-caret-right pr-10 text-colored"></i> 13512096 - Kevin</li>
+                            <li><i class="fa fa-caret-right pr-10 text-colored"></i> 13512100 - Luthfi Hamid Masykuri</li>
                         </ul>
                     </div>
                 </div>
@@ -449,7 +449,6 @@ $list_taman = GetAllTaman();
 <div class="section translucent-bg bg-image-2 pb-clear">
     <div class="container object-non-visible" data-animation-effect="fadeIn">
         <h1 id="data" class="title text-center">Data Keluhan Taman Kota Bandung</h1>
-        <div class="space"></div>
         <div id="map-canvas"></div>
         <div class="space"></div>
         <div class="space"></div>
@@ -477,7 +476,7 @@ $list_taman = GetAllTaman();
                     <div class="footer-content">
                         <p class="large">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel nam magnam natus tempora cumque, aliquam deleniti voluptatibus voluptas. Repellat vel, et itaque commodi iste ab, laudantium voluptas deserunt nobis.</p>
                         <ul class="list-icons">
-                            <li><i class="fa fa-map-marker pr-10"></i> One infinity loop, 54100</li>
+                            <li><i class="fa fa-map-marker pr-10"></i> Gedung Benny Subianto, Jalan Ganesha no. 10 Bandung</li>
                             <li><i class="fa fa-phone pr-10"></i> +00 1234567890</li>
                             <li><i class="fa fa-fax pr-10"></i> +00 1234567891 </li>
                             <li><i class="fa fa-envelope-o pr-10"></i> your@email.com</li>
@@ -588,11 +587,29 @@ $list_taman = GetAllTaman();
     var map;
     function initialize() {
         var mapOptions = {
-            zoom: 12,
+            zoom: 13,
             center: new google.maps.LatLng(-6.9033101,107.642621)
         };
-        map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        var infowindow;
+        <?php
+        $list_taman = GetAllTaman();
+        foreach ($list_taman as $taman){
+        ?>
+
+        var marker<?php echo $taman['id']; ?>  = new google.maps.Marker({
+            position: new google.maps.LatLng(<?php echo $taman['latitude']; ?> , <?php echo $taman['longitude']; ?> ),
+            map: map,
+            title: "<?php echo $taman['nama']; ?>"
+        });
+        google.maps.event.addListener(marker<?php echo $taman['id']; ?>, 'click', function() {
+            infowindow = new google.maps.InfoWindow({
+                content: '<div align="center" class="info-map"><a href="#">10 Keluhan</a></div>'
+            });
+            infowindow.open(map,marker<?php echo $taman['id']; ?> );
+        });
+
+        <?php } ?>
     }
 
     google.maps.event.addDomListener(window, 'load', initialize);
