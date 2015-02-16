@@ -62,4 +62,12 @@
         ]);
         return ($data > 0);
     }
+
+    function GetLaporanTaman($id)
+    {
+        $data = $GLOBALS['database']->count("keluhan","*",[
+            "taman" => $id
+        ]);
+        return $data;
+    }
 ?>

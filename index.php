@@ -1,6 +1,74 @@
 <?php
 require_once dirname(__FILE__)."/modules/models/kategori.php";
 require_once dirname(__FILE__)."/modules/models/taman.php";
+require_once dirname(__FILE__)."/modules/models/keluhan.php";
+
+$target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["foto"]["name"]);
+$uploadOk = 1;
+$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+$err_msg = "";
+$file_name = "";
+// Check if image file is a actual image or fake image
+if(isset($_POST["submit"])) {
+    $check = getimagesize($_FILES["foto"]["tmp_name"]);
+    if($check !== false) {
+        $err_msg = "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        $err_msg = "File is not an image.";
+        $uploadOk = 0;
+    }
+    // Check if file already exists
+    if (file_exists($target_file)) {
+        $err_msg = "Sorry, file already exists.";
+        $uploadOk = 0;
+    }
+// Check file size
+    if ($_FILES["foto"]["size"] > 2000000) {
+        $err_msg = "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+// Allow certain file formats
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ) {
+        $err_msg = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+    }
+// Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        //echo $err_msg;
+        // if everything is ok, try to upload file
+    } else {
+        $file_name = date("Ymd-His").".".$imageFileType;
+        $target_file = $target_dir.$file_name;
+        if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
+            $uploadOk = 1;
+        } else {
+            $uploadOk = 0;
+        }
+    }
+}
+
+$laporan_masuk = false;
+
+if(isset($_POST["submit"]))
+{
+    if ($uploadOk == 0)
+    {
+        $file_name = "";
+    }
+    $data = array(
+        "nama_pelapor"  => $_POST["nama_pelapor"],
+        "email"         => $_POST["email"],
+        "taman" => $_POST["taman"],
+        "deskripsi" => $_POST["deskripsi"],
+        "foto" => $file_name,
+        "kategori" => $_POST["kategori"],
+        "status" => 0
+    );
+    $laporan_masuk = AddKeluhan($data);
+}
 
 $kategori = GetAllKategori();
 $list_taman = GetAllTaman();
@@ -141,7 +209,7 @@ $list_taman = GetAllTaman();
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 object-non-visible" data-animation-effect="fadeIn">
                     <h1 class="text-center">Selamat <span>Datang</span></h1>
-                    <p class="lead text-center">Sistem Pengaduan Taman Kota Bandung merupakan wadah bagi Anda untuk menyampaikan keluhan terhadap taman di kota Bandung. Dengan adanya sistem kami, diharapkan keluhan akan ditindaklajuti lebih cepat oleh pemerintah kota Bandung.</p>
+                    <p class="lead text-center">Kita semua mencintai Bandung. Pernah ke salah satu tamannya? Jika Anda ke sini, pasti Anda memiliki keluhan atau masukkan terkait salah satunya. Masukkan Anda sangat berarti buat kami.</p>
                     <div class="smooth-scroll" align="center"><a href="#lapor" class="btn btn-lg btn-primary">Laporkan Keluhan Anda Sekarang!</a></div>
                 </div>
             </div>
@@ -223,7 +291,7 @@ $list_taman = GetAllTaman();
 <div class="row object-non-visible" data-animation-effect="fadeIn">
 <div class="col-md-12">
 
-    <form class="form-horizontal style-form" method="post" enctype="multipart/form-data" action="lapor_keluhan.php">
+    <form class="form-horizontal style-form" method="post" enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF'] ?>">
         <fieldset>
             <div class="form-group">
                 <label for="nama" class="col-lg-2 control-label">Nama</label>
@@ -327,11 +395,11 @@ $list_taman = GetAllTaman();
             <div class="row">
                 <div class="col-sm-6">
                     <div class="footer-content">
-                        <p class="large">Kami sangat menerima kritik dan saran dari Anda. Untuk info lebih lanjut serta kritik dan saran Anda dapat menghubungi kami pada kontak berikut ini.</p>
+                        <p class="large">Jika Anda memiliki masukkan terkait dengan sistem pengaduan ini, silakan hubungi salah satu jalur yang tersedia di bawah ini. Anda juga dapat mengisi formulir di bagian kanan. Tim kami akan sesegera mungkin merespons Anda.</p>
                         <ul class="list-icons">
                             <li><i class="fa fa-map-marker pr-10"></i> Gedung Benny Subianto, Jalan Ganesha no. 10 Bandung</li>
-                            <li><i class="fa fa-phone pr-10"></i> +00 1234567890</li>
-                            <li><i class="fa fa-fax pr-10"></i> +00 1234567891 </li>
+                            <li><i class="fa fa-phone pr-10"></i> (022) 1234567</li>
+                            <li><i class="fa fa-fax pr-10"></i> 08112345678 </li>
                             <li><i class="fa fa-envelope-o pr-10"></i> bandung@sarius.com</li>
                         </ul>
                     </div>
@@ -361,7 +429,31 @@ $list_taman = GetAllTaman();
 
 </footer>
 <!-- footer end -->
-
+<?php if ($laporan_masuk){ ?>
+<div class="modal fade" id="modal-success" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-label">Berhasil!</h4>
+            </div>
+            <div class="modal-body" align="center">
+                <div class="space"></div>
+                <div class="space"></div>
+                <h1>Terima Kasih!</h1>
+                <h3>Keluhan Anda sudah masuk ke dalam Sistem kami. Setelah kami verifikasi, keluhan Anda akan otomatis terkirim ke Dinas Pertamanan dan Pemakaman Kota Bandung.</h3>
+                <div class="space"></div>
+                <div class="smooth-scroll" align="center"><a href="#contact" class="btn btn-lg btn-primary" onclick="HideModal()">Anda bisa memnghubungi kami di sini!</a></div>
+                <div class="space"></div>
+                <div class="space"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php } ?>
 <!-- JavaScript files placed at the end of the document so the pages load faster
 ================================================== -->
 <!-- Jquery and Bootstap core js files -->
@@ -410,32 +502,50 @@ $list_taman = GetAllTaman();
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 <script>
+    $('#modal-success').modal('show');
+    function HideModal()
+    {
+        $('#modal-success').modal('hide');
+    }
     var map;
+    var mapCenter = new google.maps.LatLng(-6.8968177,107.608704);
     function initialize() {
-        var mapOptions = {
-            zoom: 13,
-            center: new google.maps.LatLng(-6.9033101,107.642621)
+        var googleMapOptions =
+        {
+            center: mapCenter, // map center
+            zoom: 15, //zoom level, 0 = earth view to higher value
+            maxZoom: 18,
+            minZoom: 13,
+            zoomControlOptions: {
+                style: google.maps.ZoomControlStyle.SMALL //zoom control size
+            },
+            scaleControl: true, // enable scale control
+            mapTypeId: google.maps.MapTypeId.ROADMAP // google map type
         };
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        var infowindow;
-        <?php
-        $list_taman = GetAllTaman();
-        foreach ($list_taman as $taman){
-        ?>
 
-        var marker<?php echo $taman['id']; ?>  = new google.maps.Marker({
-            position: new google.maps.LatLng(<?php echo $taman['latitude']; ?> , <?php echo $taman['longitude']; ?> ),
-            map: map,
-            title: "<?php echo $taman['nama']; ?>"
-        });
-        google.maps.event.addListener(marker<?php echo $taman['id']; ?>, 'click', function() {
-            infowindow = new google.maps.InfoWindow({
-                content: '<div align="center" class="info-map"><a href="#">10 Keluhan</a></div>'
+        map = new google.maps.Map(document.getElementById("map-canvas"), googleMapOptions);
+
+        //Load Markers from the XML File, Check (map_process.php)
+        $.get("modules/ajax/taman.php?get_list", function (data) {
+            $(data).find("marker").each(function () {
+                var point 	= new google.maps.LatLng(parseFloat($(this).attr('lat')),parseFloat($(this).attr('lng')));
+                var marker = new google.maps.Marker({
+                    position: point,
+                    map: map,
+                    animation: google.maps.Animation.DROP,
+                    icon: "assets/img/pin_blue.png"
+                });
+                var infowindow = new google.maps.InfoWindow();
+                var name = $(this).attr('name');
+                var id = $(this).attr('id_taman');
+                google.maps.event.addDomListener(marker, "click", function(event) {
+                    $.get("modules/ajax/taman.php?get_laporan="+id, function (html) {
+                        infowindow.setContent("<h1>"+name+"</h1><p>"+html+" Keluhan</p>");
+                        infowindow.open(map,marker);
+                    });
+                });
             });
-            infowindow.open(map,marker<?php echo $taman['id']; ?> );
         });
-
-        <?php } ?>
     }
 
     google.maps.event.addDomListener(window, 'load', initialize);

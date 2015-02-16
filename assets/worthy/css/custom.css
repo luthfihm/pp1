@@ -10,14 +10,15 @@ File Description: Place here your custom CSS styles
 
 #map-canvas {
     height: 450px;
+    color: #4c4d4d;
 }
 
-.info-map {
-    color: #000;
-    padding-left: 20px;
+#map-canvas h1 {
+    color: #4c4d4d;
 }
 
-.info-map a {
+
+#map-canvas a {
     color: #0976b4;
     text-decoration: none;
     font-weight: bold;

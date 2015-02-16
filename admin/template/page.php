@@ -43,6 +43,12 @@
         $active = "taman";
         $title = "Daftar Taman";
     }
+    else if (isset($_REQUEST['setelan']))
+    {
+        $content = "setelan.php";
+        $active = "setting";
+        $title = "Setelan";
+    }
     else
     {
         $content = "keluhan_masuk.php";
@@ -147,7 +153,7 @@ MAIN CONTENT
                 <li class="<?php if ($active=='verified') echo 'active'; ?>"><a href="index.php?keluhan_terverifikasi"> <i class="fa fa-check-circle"></i> Keluhan Terverifikasi  </a></li>
                 <li class="<?php if ($active=='user') echo 'active'; ?>"><a href="index.php?manajemen_pengguna"> <i class="fa fa-user"></i> Manajemen Pengguna  </a></li>
                 <li class="<?php if ($active=='taman') echo 'active'; ?>"><a href="index.php?daftar_taman"> <i class="fa fa-tree"></i> Daftar Taman  </a></li>
-                <li class="<?php if ($active=='setting') echo 'active'; ?>"><a href="#"> <i class="fa fa-cog"></i> Setelan  </a></li>
+                <li class="<?php if ($active=='setting') echo 'active'; ?>"><a href="index.php?setelan"> <i class="fa fa-cog"></i> Setelan  </a></li>
             </ul>
         </div>
     </section>

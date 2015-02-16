@@ -264,16 +264,12 @@
                 var cancelBtn 	= replaceWin.find('button.cancel-edit')[0];
                 google.maps.event.addDomListener(cancelBtn, "click", function(event) {
                     marker.setPosition(OldLatLng);
-                    replaceWin.html('<h1 class="marker-heading">'+MapTitle+'</h1><p>'+MapAddress+'</p><button name="edit-marker" class="edit-marker btn btn-sm btn-primary">Edit</button> <button name="remove-marker" class="remove-marker btn btn-default btn-sm" title="Remove Marker">Hapus</button>');
+                    replaceWin.html('<h1 class="marker-heading">'+MapTitle+'</h1><p>'+MapAddress+'</p><button name="edit-marker" class="edit-marker btn btn-sm btn-primary">Edit</button>');
                     marker.setDraggable(false); //set marker to fixed
                     marker.setIcon('../assets/img/pin_blue.png'); //replace icon
                     var editBtn 	= replaceWin.find('button.edit-marker')[0];
-                    var removeBtn 	= replaceWin.find('button.remove-marker')[0];
                     google.maps.event.addDomListener(editBtn, "click", function(event) {
                         ShowEditForm(marker,MapTitle,MapAddress, replaceWin);
-                    });
-                    google.maps.event.addDomListener(removeBtn, "click", function(event) {
-                        remove_marker(marker);
                     });
                 });
                 google.maps.event.addDomListener(saveEdit, "click", function(event) {

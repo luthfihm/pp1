@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 13, 2015 at 06:35 PM
+-- Generation Time: Feb 17, 2015 at 12:01 AM
 -- Server version: 5.5.38
 -- PHP Version: 5.4.24
 
@@ -41,6 +41,18 @@ INSERT INTO `admin` (`username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `instansi`
+--
+
+CREATE TABLE IF NOT EXISTS `instansi` (
+`id` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kategori`
 --
 
@@ -48,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `kategori` (
 `id` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `deskripsi` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `kategori`
@@ -57,7 +69,8 @@ CREATE TABLE IF NOT EXISTS `kategori` (
 INSERT INTO `kategori` (`id`, `nama`, `deskripsi`) VALUES
 (1, 'Pedagang Kaki Lima', ''),
 (2, 'Kebersihan', ''),
-(3, 'Keamanan', '');
+(3, 'Keamanan', ''),
+(5, 'Pengemis', '');
 
 -- --------------------------------------------------------
 
@@ -76,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `keluhan` (
   `kategori` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `read` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `keluhan`
@@ -86,7 +99,8 @@ INSERT INTO `keluhan` (`id`, `nama_pelapor`, `email`, `waktu`, `taman`, `deskrip
 (1, 'Luthfi', 'luthfi_hamid_m@yahoo.co.id', '2014-12-31 15:30:06', 1, 'Test', '20150211-233006.jpg', 1, 1, 1),
 (3, 'Rifda', 'rifda@rifda.com', '2015-02-12 11:26:11', 1, 'Haha', '', 3, 1, 1),
 (6, 'Luthfi', 'luthfi_hamid_m@arc.itb.ac.id', '2015-02-13 07:31:16', 1, 'Test aja', '20150213-153116.jpg', 3, 1, 1),
-(8, 'Luthfi', 'luthfi_hamid_m@arc.itb.ac.id', '2015-02-13 07:54:30', 1, 'Test aja', '20150213-155430.jpg', 3, 1, 1);
+(8, 'Luthfi', 'luthfi_hamid_m@arc.itb.ac.id', '2015-02-13 07:54:30', 1, 'Test aja', '20150213-155430.jpg', 3, 1, 1),
+(11, 'Luthfi', 'luthfi_hamid_m@arc.itb.ac.id', '2015-02-13 18:31:38', 3, 'Ih kotor', '20150214-023138.png', 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -100,16 +114,18 @@ CREATE TABLE IF NOT EXISTS `taman` (
   `alamat` varchar(255) NOT NULL,
   `latitude` double NOT NULL,
   `longitude` double NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `taman`
 --
 
 INSERT INTO `taman` (`id`, `nama`, `alamat`, `latitude`, `longitude`) VALUES
-(1, 'Taman Dago', 'Jalan Juanda', 0, 0),
-(2, 'Taman Ganesha', 'Jalan Ganesha', 0, 0),
-(3, 'Taman Jomblo', 'Jembatan Pasopati', 0, 0);
+(1, 'Taman Dago', 'Jalan Juanda', -6.898721, 107.6126),
+(2, 'Taman Ganesha', 'Jalan Ganesha', -6.893925, 107.610458),
+(3, 'Taman Jomblo', 'Jembatan Pasopati', -6.898053, 107.609518),
+(16, 'a', 'a', -6.897141, 107.623401),
+(18, 'a', 'a', -6.900507, 107.618637);
 
 --
 -- Indexes for dumped tables
@@ -120,6 +136,12 @@ INSERT INTO `taman` (`id`, `nama`, `alamat`, `latitude`, `longitude`) VALUES
 --
 ALTER TABLE `admin`
  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `instansi`
+--
+ALTER TABLE `instansi`
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `kategori`
@@ -144,20 +166,25 @@ ALTER TABLE `taman`
 --
 
 --
+-- AUTO_INCREMENT for table `instansi`
+--
+ALTER TABLE `instansi`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `keluhan`
 --
 ALTER TABLE `keluhan`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `taman`
 --
 ALTER TABLE `taman`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- Constraints for dumped tables
 --

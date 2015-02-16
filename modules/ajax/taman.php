@@ -19,6 +19,7 @@
         foreach ($list_taman as $taman) {
             $node = $dom->createElement("marker");
             $newnode = $parnode->appendChild($node);
+            $newnode->setAttribute("id_taman",$taman['id']);
             $newnode->setAttribute("name",$taman['nama']);
             $newnode->setAttribute("address",$taman['alamat']);
             $newnode->setAttribute("lat", $taman['latitude']);
@@ -47,6 +48,14 @@
             {
                 echo '<h1 class="marker-heading">'.$mName.'</h1><p>'.$mAddress.'</p><button name="edit-marker" class="edit-marker btn btn-sm btn-primary">Edit</button>';
             }
+        }
+    }
+    else if (isset($_REQUEST['get_laporan']))
+    {
+        if($_REQUEST['get_laporan'] != null)
+        {
+            $id = $_REQUEST['get_laporan'];
+            echo GetLaporanTaman($id);
         }
     }
     else if (isset($_REQUEST['edit']))

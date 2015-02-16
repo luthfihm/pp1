@@ -119,6 +119,42 @@ Demikianlah pemberitahuan ini telah Kami sampaikan. Atas perhatiannya, Kami ucap
 
 Hormat kami,
 Sistem Pengaduan Taman Kota Bandung';
+        if ($keluhan['foto'] != '')
+        {
+            $mail->addAttachment(dirname(dirname(dirname(__FILE__)))."/uploads/".$keluhan['foto']);
+        }
+        return $mail->send();
+    }
+
+    function KirimFeedBack($id)
+    {
+        $keluhan = GetKeluhan($id);
+        $taman = GetTaman($keluhan['taman']);
+        $kategori = GetKategori($keluhan['kategori']);
+        $date = new DateTime($keluhan['waktu']);
+        $bulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+        $tanggal = $date->format('j').' '.$bulan[$date->format('n')-1].' '.$date->format('Y');
+
+        $mail = new PHPMailer;
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'mail.luthfihm.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'bandung@luthfihm.com';                 // SMTP username
+        $mail->Password = 'ppl1bandung';                           // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 25;                                    // TCP port to connect to
+
+        $mail->From = 'bandung@luthfihm.com';
+        $mail->FromName = 'Sistem Pengaduan Taman Kota Bandung';
+        $mail->addAddress($keluhan['email']);
+        //$mail->isHTML(true);
+        $mail->Subject = 'Keluhan Mengenai '.$kategori['nama'].' di '.$taman['nama'];
+        $mail->Body    = 'Kepada Bapak/Ibu '.$keluhan['nama'].'
+Kami dari Sistem Pengaduan Taman Kota Bandung ingin memberitahukan bahwa keluhan yang telah Anda sampaikan pada situs Kami pada tanggal '.$tanggal.' di '.$taman['nama'].' mengenai '.$kategori['nama'].' telah diverifikasi dan dikirim kepada Dinas Pertamanan Kota Bandung.
+Demikianlah pemberitahuan ini telah Kami sampaikan. Atas perhatian Anda, Kami ucapkan terimakasih.
+
+Hormat Kami,
+Sistem Pengaduan Taman Kota Bandung';
+
         return $mail->send();
     }
 

@@ -9,6 +9,7 @@
     require_once dirname(__FILE__)."/../modules/models/kategori.php";
     require_once dirname(__FILE__)."/../modules/models/taman.php";
     require_once dirname(__FILE__)."/../modules/models/keluhan.php";
+    require_once dirname(__FILE__)."/../modules/models/instansi.php";
     if (IsLoggedIn())
     {
         if (isset($_REQUEST['logout']))
@@ -23,7 +24,8 @@
                 $id = $_REQUEST['verifikasi_keluhan'];
                 if (VerifikasiKeluhan($id))
                 {
-                    if (KirimKeluhan($id,"luthfi_hamid_m@yahoo.co.id"))
+                    $instansi = GetInstansi();
+                    if (KirimKeluhan($id,$instansi['email'])&&KirimFeedBack($id))
                     {
                         header("Location: index.php?keluhan_terverifikasi");
                     }
@@ -57,11 +59,13 @@
         {
             if (isset($_POST['id_keluhan']))
             {
+                $instansi = GetInstansi();
                 foreach ($_POST['id_keluhan'] as $id_keluhan) {
                     if (isset($_POST['verifikasi']))
                     {
                         VerifikasiKeluhan($id_keluhan);
-                        KirimKeluhan($id_keluhan,"luthfi_hamid_m@yahoo.co.id");
+                        KirimKeluhan($id_keluhan,$instansi['email']);
+                        KirimFeedBack($id_keluhan);
                     }
                     else if (isset($_POST['hapus']))
                     {
@@ -108,6 +112,17 @@
                 }
             }
             header("Location: index.php");
+        }
+        else if (isset($_REQUEST['simpan_setelan']))
+        {
+            if ($_POST)
+            {
+                $nama = $_POST['nama-instansi'];
+                $email = $_POST['email-instansi'];
+                EditInstansi($nama,$email);
+            }
+
+            header("Location: index.php?setelan");
         }
         else
         {
