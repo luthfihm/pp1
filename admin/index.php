@@ -23,7 +23,14 @@
                 $id = $_REQUEST['verifikasi_keluhan'];
                 if (VerifikasiKeluhan($id))
                 {
-                    header("Location: index.php?keluhan_terverifikasi");
+                    if (KirimKeluhan($id,"luthfi_hamid_m@yahoo.co.id"))
+                    {
+                        header("Location: index.php?keluhan_terverifikasi");
+                    }
+                    else
+                    {
+                        header("Location: index.php?keluhan=".$id);
+                    }
                 }
                 else
                 {

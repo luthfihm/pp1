@@ -88,4 +88,11 @@
         ]);
         return $data;
     }
+
+    function KirimKeluhan($id,$email)
+    {
+
+    }
+
+
 ?>
