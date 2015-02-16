@@ -20,4 +20,30 @@
             echo "false";
         }
     }
+    else if (isset($_REQUEST['cek_pass']))
+    {
+        $user = $_POST['username'];
+        $pass = $_POST['password'];
+        if (ValidateAdmin($user,$pass))
+        {
+            echo "true";
+        }
+        else
+        {
+            echo "false";
+        }
+    }
+    else if (isset($_REQUEST['change_pass']))
+    {
+        $user = $_POST['username'];
+        $pass = $_POST['password'];
+        if (ChangeUserPass($user,$pass))
+        {
+            echo "true";
+        }
+        else
+        {
+            echo "false";
+        }
+    }
 ?>

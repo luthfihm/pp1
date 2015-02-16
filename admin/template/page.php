@@ -31,6 +31,12 @@
         $active = "laporan";
         $title = "Buat Laporan";
     }
+    else if (isset($_REQUEST['manajemen_pengguna']))
+    {
+        $content = "manajemen_pengguna.php";
+        $active = "user";
+        $title = "Manajemen Pengguna";
+    }
     else
     {
         $content = "keluhan_masuk.php";
@@ -72,6 +78,28 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="../assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="../assets/js/jquery.scrollTo.min.js"></script>
+    <script src="../assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+
+    <!--common script for all pages-->
+    <script src="../assets/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script src="../assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+    <script type="text/javascript" src="../assets/js/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap-daterangepicker/date.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <script type="text/javascript" src="../assets/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap-daterangepicker/moment.min.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+    <script src="../assets/js/advanced-form-components.js"></script>
 </head>
 
 <body>
@@ -110,7 +138,7 @@ MAIN CONTENT
             <ul class="nav nav-pills nav-stacked mail-nav">
                 <li class="<?php if ($active=='masuk') echo 'active'; ?>"><a href="index.php?keluhan_masuk"> <i class="fa fa-inbox"></i> Keluhan Masuk  <?php if ($num_keluhan >0){ ?><span class="label label-theme pull-right inbox-notification"><?php echo $num_keluhan ?></span><?php } ?></a></li>
                 <li class="<?php if ($active=='verified') echo 'active'; ?>"><a href="index.php?keluhan_terverifikasi"> <i class="fa fa-check-circle"></i> Keluhan Terverifikasi  </a></li>
-                <li class="<?php if ($active=='user') echo 'active'; ?>"><a href="#"> <i class="fa fa-user"></i> Manajemen Pengguna  </a></li>
+                <li class="<?php if ($active=='user') echo 'active'; ?>"><a href="index.php?manajemen_pengguna"> <i class="fa fa-user"></i> Manajemen Pengguna  </a></li>
                 <li class="<?php if ($active=='setting') echo 'active'; ?>"><a href="#"> <i class="fa fa-cog"></i> Setelan  </a></li>
             </ul>
         </div>
@@ -143,28 +171,7 @@ MAIN CONTENT
 <!--main content end-->
 
 <!-- js placed at the end of the document so the pages load faster -->
-<script src="../assets/js/jquery.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<script class="include" type="text/javascript" src="../assets/js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="../assets/js/jquery.scrollTo.min.js"></script>
-<script src="../assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 
-
-<!--common script for all pages-->
-<script src="../assets/js/common-scripts.js"></script>
-
-<!--script for this page-->
-<script src="../assets/js/jquery-ui-1.9.2.custom.min.js"></script>
-
-<script type="text/javascript" src="../assets/js/bootstrap-fileupload/bootstrap-fileupload.js"></script>
-<script type="text/javascript" src="../assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="../assets/js/bootstrap-daterangepicker/date.js"></script>
-<script type="text/javascript" src="../assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-<script type="text/javascript" src="../assets/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="../assets/js/bootstrap-daterangepicker/moment.min.js"></script>
-<script type="text/javascript" src="../assets/js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
-<script src="../assets/js/advanced-form-components.js"></script>
 
 <script>
 //custom select box

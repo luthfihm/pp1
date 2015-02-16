@@ -7,14 +7,7 @@
      */
     function LoginAdmin($user,$pass)
     {
-        $pass_encrypted = md5($pass);
-        $data = $GLOBALS['database']->count("admin",[
-            "AND" => [
-                "username" => $user,
-                "password" => $pass_encrypted
-            ]
-        ]);
-        if ($data == 1)
+        if (ValidateAdmin($user,$pass))
         {
             $_SESSION["username_ppl"] = $user;
             return true;
@@ -24,9 +17,37 @@
             return false;
         }
     }
+
+    function ValidateAdmin($user,$pass)
+    {
+        $pass_encrypted = md5($pass);
+        $data = $GLOBALS['database']->count("admin",[
+            "AND" => [
+                "username" => $user,
+                "password" => $pass_encrypted
+            ]
+        ]);
+        return ($data == 1);
+    }
+
+    function ChangeUserPass($user,$pass)
+    {
+        $pass_encrypted = md5($pass);
+        $data = $GLOBALS['database']->update("admin",[
+            "username" => $user,
+            "password" => $pass_encrypted
+        ]);
+        return ($data == 1);
+    }
+
     function IsLoggedIn()
     {
         return isset($_SESSION["username_ppl"]);
+    }
+
+    function GetUserLoggedIn()
+    {
+        return $_SESSION["username_ppl"];
     }
     function Logout()
     {
