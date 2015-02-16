@@ -61,6 +61,7 @@
                     if (isset($_POST['verifikasi']))
                     {
                         VerifikasiKeluhan($id_keluhan);
+                        KirimKeluhan($id_keluhan,"luthfi_hamid_m@yahoo.co.id");
                     }
                     else if (isset($_POST['hapus']))
                     {
