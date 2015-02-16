@@ -3342,4 +3342,13 @@ ul.chat-available-user li a:hover {
     min-height: 900px;
 }
 
+.edit-kategori {
+    display: none;
+    margin-left: 10px;
+}
+
+.list-kategori:hover .edit-kategori {
+    display: block;
+}
+
 

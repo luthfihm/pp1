@@ -112,7 +112,7 @@ $list_taman = GetAllTaman();
                                         <li><a href="#about">Tentang Kami</a></li>
                                         <li><a href="#services">Alur Kerja</a></li>
                                         <li><a href="#lapor">Lapor!</a></li>
-                                        <li><a href="#clients">Data Keluhan</a></li>
+                                        <li><a href="#data">Data Keluhan</a></li>
                                         <li><a href="#contact">Kontak</a></li>
                                     </ul>
                                 </div>
@@ -132,7 +132,26 @@ $list_taman = GetAllTaman();
     </div>
 </header>
 <!-- header end -->
+<?php if (false) { ?>
+    <!-- section start -->
+    <!-- ================ -->
+    <div class="section">
+        <div class="container">
+            <h1 class="text-center title" id="lapor">Laporkan Keluhan Anda</h1>
+            <div class="separator"></div>
+            <p class="lead text-center">Lorem ipsum dolor sit amet laudantium molestias similique.<br> Quisquam incidunt ut laboriosam.</p>
+            <br>
+            <div class="row object-non-visible" data-animation-effect="fadeIn">
+                <div class="col-md-12">
 
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- section end -->
+<?php }else{ ?>
 <!-- banner start -->
 <!-- ================ -->
 <div id="banner" class="banner" style="background-image: url('assets/worthy/images/banner.jpg');">
@@ -429,151 +448,17 @@ $list_taman = GetAllTaman();
 <!-- ================ -->
 <div class="section translucent-bg bg-image-2 pb-clear">
     <div class="container object-non-visible" data-animation-effect="fadeIn">
-        <h1 id="clients" class="title text-center">Clients</h1>
+        <h1 id="data" class="title text-center">Data Keluhan Taman Kota Bandung</h1>
         <div class="space"></div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="media testimonial">
-                    <div class="media-left">
-                        <img src="assets/worthy/images/testimonial-1.png" alt="">
-                    </div>
-                    <div class="media-body">
-                        <h3 class="media-heading">You are Amazing!</h3>
-                        <blockquote>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure aperiam consequatur quo.</p>
-                            <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="media testimonial">
-                    <div class="media-left">
-                        <img src="assets/worthy/images/testimonial-2.png" alt="">
-                    </div>
-                    <div class="media-body">
-                        <h3 class="media-heading">Yeah!</h3>
-                        <blockquote>
-                            <p>Iure aperiam consequatur quo quis exercitationem reprehenderit dolor vel ducimus.</p>
-                            <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="media testimonial">
-                    <div class="media-left">
-                        <img src="assets/worthy/images/testimonial-3.png" alt="">
-                    </div>
-                    <div class="media-body">
-                        <h3 class="media-heading">Thank You!</h3>
-                        <blockquote>
-                            <p>Aperiam consequatur quo quis exercitationem reprehenderit suscipit iste placeat.</p>
-                            <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="media testimonial">
-                    <div class="media-left">
-                        <img src="assets/worthy/images/testimonial-2.png" alt="">
-                    </div>
-                    <div class="media-body">
-                        <h3 class="media-heading">Thank You!</h3>
-                        <blockquote>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure aperiam consequatur quo.</p>
-                            <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="media testimonial">
-                    <div class="media-left">
-                        <img src="assets/worthy/images/testimonial-3.png" alt="">
-                    </div>
-                    <div class="media-body">
-                        <h3 class="media-heading">Amazing!</h3>
-                        <blockquote>
-                            <p>Iure aperiam consequatur quo quis exercitationem reprehenderit dolor vel ducimus.</p>
-                            <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="media testimonial">
-                    <div class="media-left">
-                        <img src="assets/worthy/images/testimonial-1.png" alt="">
-                    </div>
-                    <div class="media-body">
-                        <h3 class="media-heading">Best!</h3>
-                        <blockquote>
-                            <p>Aperiam consequatur quo quis exercitationem reprehenderit suscipit iste placeat.</p>
-                            <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="map-canvas"></div>
+        <div class="space"></div>
+        <div class="space"></div>
+        <div class="space"></div>
+        <div class="space"></div>
     </div>
     <!-- section start -->
     <!-- ================ -->
-    <div class="translucent-bg blue">
-        <div class="container">
-            <div class="list-horizontal">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <div class="list-horizontal-item">
-                            <img src="assets/worthy/images/client-1.png" alt="client">
-                        </div>
-                    </div>
-                    <div class="col-xs-2">
-                        <div class="list-horizontal-item">
-                            <img src="assets/worthy/images/client-2.png" alt="client">
-                        </div>
-                    </div>
-                    <div class="col-xs-2">
-                        <div class="list-horizontal-item">
-                            <img src="assets/worthy/images/client-3.png" alt="client">
-                        </div>
-                    </div>
-                    <div class="col-xs-2">
-                        <div class="list-horizontal-item">
-                            <img src="assets/worthy/images/client-4.png" alt="client">
-                        </div>
-                    </div>
-                    <div class="col-xs-2">
-                        <div class="list-horizontal-item">
-                            <img src="assets/worthy/images/client-5.png" alt="client">
-                        </div>
-                    </div>
-                    <div class="col-xs-2">
-                        <div class="list-horizontal-item">
-                            <img src="assets/worthy/images/client-6.png" alt="client">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- section end -->
-</div>
-<!-- section end -->
-
-<!-- section start -->
-<!-- ================ -->
-<div class="default-bg space">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h1 class="text-center">10000+ Happy Clients!</h1>
-            </div>
-        </div>
-    </div>
 </div>
 <!-- section end -->
 
@@ -635,7 +520,7 @@ $list_taman = GetAllTaman();
         </div>
     </div>
     <!-- .footer end -->
-
+    <?php } ?>
     <!-- .subfooter start -->
     <!-- ================ -->
     <div class="subfooter">
@@ -697,6 +582,23 @@ $list_taman = GetAllTaman();
 <script type="text/javascript" src="assets/js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
 
 <script src="assets/js/advanced-form-components.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script>
+    var map;
+    function initialize() {
+        var mapOptions = {
+            zoom: 12,
+            center: new google.maps.LatLng(-6.9033101,107.642621)
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
 
 </body>
 </html>

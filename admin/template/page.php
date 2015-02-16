@@ -44,6 +44,7 @@
         $title = "Home";
     }
     $list_taman = GetAllTaman();
+    $list_kategori = GetAllKategori();
 ?>
 
 <!DOCTYPE html>
@@ -146,12 +147,24 @@ MAIN CONTENT
     <section class="panel">
         <div class="panel-body">
             <ul class="nav nav-pills nav-stacked labels-info ">
-                <li> <h4>Daftar Taman</h4> </li>
-                <?php foreach ($list_taman as $taman){ ?>
-                <li> <a href="#"> <img src="../assets/img/tree.png" class="img-circle" width="20"><?php echo $taman['nama']; ?> <p><?php echo $taman['alamat']; ?></p></a></li>
+                <li> <h4>Daftar Kategori</h4> </li>
+                <?php foreach ($list_kategori as $kategori){ ?>
+                <li class="list-kategori">
+                    <a href="#">
+                        <img src="../assets/img/tree.png" class="img-circle" width="20"><?php echo $kategori['nama']; ?>
+                        <p class="edit-kategori">
+                            <button class="btn btn-sm btn-theme">
+                                <i class="fa fa-pencil"> Edit</i>
+                            </button>
+                            <button class="btn btn-sm btn-default">
+                                <i class="fa fa-trash"> Hapus</i>
+                            </button>
+                        </p>
+                    </a>
+                </li>
                 <?php } ?>
             </ul>
-            <a href="#"> + Tambah Taman</a>
+            <a href="#"> + Tambah Kategori</a>
         </div>
     </section>
 </div>
